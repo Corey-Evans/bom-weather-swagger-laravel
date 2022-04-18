@@ -1,0 +1,104 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "BOM Weather Swagger",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/current_temperature/{weatherStationId}/": {
+            "get": {
+                "tags": [
+                    "weather"
+                ],
+                "summary": "Get current temperature at a BoM weather station",
+                "description": "Get current temperature at a BoM weather station",
+                "operationId": "currentTemperature",
+                "parameters": [
+                    {
+                        "name": "weatherStationId",
+                        "in": "path",
+                        "description": "ID of weather station",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/currentTemperatureGet"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/weather_stations/": {
+            "get": {
+                "tags": [
+                    "weather"
+                ],
+                "summary": "Get list of weather stations that weather can be checked for",
+                "description": "Get list of weather stations that weather can be checked for",
+                "operationId": "listWeatherStations",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/listWeatherStationsGet"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "currentTemperatureGet": {
+                "title": "Result of GET currentTemperature",
+                "properties": {
+                    "status": {
+                        "type": "string"
+                    },
+                    "error": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "listWeatherStationsGet": {
+                "title": "Result of GET listWeatherStations",
+                "properties": {
+                    "status": {
+                        "type": "string"
+                    },
+                    "error": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
